@@ -1,13 +1,11 @@
-import {action, computed, makeObservable, observable} from 'mobx';
-import {createContext, useContext} from 'react';
-import AccountStore from '../account/AccountStore';
-import {CheckInStore} from '../check-in/CheckInStore';
-import {STORE_KEYS, StoreKeyValues} from './storeKeys';
+import { action, computed, makeObservable, observable } from 'mobx';
+import { createContext, useContext } from 'react';
+import AccountStore from '../AccountStore';
+import { STORE_KEYS, StoreKeyValues } from './storeKeys';
 
 export class RootStore {
   accountStore: AccountStore;
-  checkInStore: CheckInStore;
-  readyMap: {[key: StoreKeyValues]: boolean} = {};
+  readyMap: { [key: StoreKeyValues]: boolean } = {};
 
   constructor() {
     makeObservable(this, {
@@ -16,11 +14,9 @@ export class RootStore {
       setReady: action,
     });
     this.accountStore = new AccountStore(this);
-    this.checkInStore = new CheckInStore(this);
 
     this.readyMap = {
       [STORE_KEYS.ACCOUNT_STORE]: false,
-      [STORE_KEYS.CHECK_IN_STORE]: false,
     };
   }
 
